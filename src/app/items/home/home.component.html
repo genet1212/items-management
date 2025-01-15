@@ -1,0 +1,63 @@
+<div class="container" style="margin-top: 20px;margin-left: 30px;width: 777px;">
+
+  <br>
+  <h3 style="color: rgb(126, 11, 108);text-align:center"><strong>Item Management System</strong></h3>
+    <br>
+    <mat-form-field>
+      <input (input)="serchItems(filter.value)" matInput placeholder="Serch Item Here" type="text" #filter>
+    </mat-form-field>
+    <button  mat-flat-button style="width: 200px;float:right;margin:15px">Add Item</button>
+    <br>
+
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource" matSort>
+    
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+    
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+          <mat-cell *matCellDef="let items"> {{items.id}} </mat-cell>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let items"> {{items.name}} </mat-cell>
+        </ng-container>
+    
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+          <mat-cell *matCellDef="let items"> {{items.price}} </mat-cell>
+        </ng-container>
+    
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+          <mat-cell *matCellDef="let items"> {{items.quantity}} </mat-cell>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+          <mat-cell *matCellDef="let items"> {{items.description}} </mat-cell>
+        </ng-container>
+        <mat-paginator #paginator
+                    [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 15]"
+                    [showFirstLastButtons]="true">
+        </mat-paginator>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let items; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+</div>
+
+<div class="container">
+<header class="jumbotron">
+  <p>{{ content }}</p>
+</header>
+</div>
+
