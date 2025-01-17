@@ -8,7 +8,6 @@ import { Items } from '../items';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { UserService } from '../../services/user.service';
-import { ItemsListComponent } from '../items-list/items-list.component';
 import { ItemsService } from '../items.service';
 
 @Component({
@@ -18,39 +17,11 @@ import { ItemsService } from '../items.service';
   templateUrl: './home.component.html', 
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent {
 
-  displayedColumns = ['id', 'name', 'price', 'quantity','description'];
-  dataSource = new MatTableDataSource<Items>();
   content?: string;
   constructor (private userService: UserService, private itemService: ItemsService) { }
-
-
-  items:Items[]=[];
-  filteredItems:Items[]=[];
-  @ViewChild(MatSort) sort: any;
-  @ViewChild(MatPaginator) paginator: any;
  
-
-  ngAfterViewInit(): void{
-    this.itemService.fetchAllItems().subscribe((data)=>{
-      this.items=data;
-     this.dataSource = new MatTableDataSource<Items>(data);
-     this.dataSource.sort = this.sort;
-     this.dataSource.paginator = this.paginator;
-    })
-
-    }
-
-  serchItems(input:any){
-        this.filteredItems=this.items.filter(item=>item.name.toLowerCase().includes(input.toLowerCase())
-         || item.price.toString().includes(input)
-        || item.quantity.toString().includes(input)
-      || item.description.toLowerCase().includes(input.toLowerCase()));
-
-      this.dataSource = new MatTableDataSource<Items>(this.filteredItems);
-  }
-
   ngOnInit(): void {
     this.userService.getPublicContent().subscribe({
       next: data => {

@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { StorageService } from './services/storage.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  imports: [CommonModule, FormsModule] // Import CommonModule and FormsModule here
 })
 export class AppComponent implements OnInit {
   title = 'items-management';
-
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   userName?: string;
 
-  constructor(private storageService: StorageService, private router: Router) { }
+  constructor(private storageService: StorageService, private router: Router) {}
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.storageService.getToken();
@@ -27,13 +30,12 @@ export class AppComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ADMIN');
       this.showModeratorBoard = this.roles.includes('MODERATOR');
-
       this.userName = user.userName;
     }
   }
 
   logout(): void {
     this.storageService.clean();
-    this.router.navigate(['/login']); // Redirect to login page after logout
+    this.router.navigate(['/login']);
   }
 }

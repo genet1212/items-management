@@ -4,7 +4,6 @@ import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-login',
-  imports: [],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

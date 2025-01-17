@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
-  imports: [],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -17,7 +16,7 @@ export class RegisterComponent implements OnInit{
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-userName: any;
+  userName: any;
 
   constructor(private authService: AuthService) { }
 

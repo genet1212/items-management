@@ -1,3 +1,4 @@
+// src/app/board-user/board-user.component.ts
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 
@@ -10,7 +11,7 @@ export class BoardUserComponent implements OnInit {
   content?: string;
 
   constructor(private userService: UserService) { }
-  
+
     ngOnInit(): void {
       this.userService.getModeratorBoard().subscribe({
         next: data => {
@@ -26,4 +27,3 @@ export class BoardUserComponent implements OnInit {
       });
     }
   }
-  
